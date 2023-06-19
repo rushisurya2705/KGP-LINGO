@@ -1,0 +1,231 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Word Definition</title>
+</head>
+<body>
+    <h1>Word Definition</h1>
+    <form action="/" method="POST">
+        <label for="word">Enter a word:</label>
+        <input type="text" name="word" id="word" required>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if word and definition %}
+        <h2>{{ word }}</h2>
+        <p>{{ definition }}</p>
+    {% elif word and similar_words %}
+        <h2>Word Not Found</h2>
+        <h3>Did you mean?</h3>
+        <ul>
+            {% for word in similar_words %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lingopedia</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2020/11/18/10/41/train-5754933_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+        
+        .definition-card {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: blanchedalmond;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .card-list-item {
+            text-align: center;
+            margin-bottom: 10px;
+            flex: 0 0 50%;
+        }
+        
+        .card {
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .card-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+        
+        .card-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+        
+        .card-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+        
+        .card-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        
+        .header {
+            background-color: black;
+            color: #fff;
+            padding: 5px;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        h1:hover {
+            color: #1e4bef;
+        }
+        
+        .footer {
+            background-color: black;
+            padding: 5px;
+            text-align: center;
+            margin-bottom: 0;
+            color: #f8f9fa;
+        }
+        
+        footer a {
+            color: #f8f9fa;
+            margin-right: 10px;
+        }
+        
+        .social-icons {
+            margin-top: 10px;
+        }
+        
+        .card-list a {
+            color: black;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .card-list a:hover {
+            color: #0d20f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lingopedia</h1>
+    </div>
+    <div class="container">
+        <h1 class="text-center">LINGO Definition</h1>
+        <form action="/" method="POST">
+            <div class="form-group text-center">
+                <label for="word">Enter a word:</label>
+                <input type="text" name="word" id="word" class="form-control text-center" required>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Search" class="btn btn-outline-primary">
+            </div>
+        </form>
+
+        {% if word and definition %}
+            <div class="mt-4">
+                <h2 class="text-center">{{ word }}</h2>
+                <div class="definition-card">
+                    <p>{{ definition }}</p>
+                </div>
+            </div>
+        {% elif word and similar_words %}
+            <div class="mt-4">
+                <h3 class="text-center">Word Not Found</h3>
+                <h3 class="text-center">Did you mean?</h3>
+                <ul class="card-list">
+                    {% for word in similar_words %}
+                        <li class="card-list-item">
+                            <a href="/definition/{{ word }}">
+                                <div class="card card-primary">{{ word }}</div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Lingopedia  |
+            <a href="mailto:rushisurya2705@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/rushisurya2705" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/rushikesh-suryavanshi-028921221" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/rushisurya2705" target="_blank"><i class="fab fa-instagram"></i></a>
+        </p>
+    </div>
+</body>
+</html>
